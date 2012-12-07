@@ -21,7 +21,7 @@ namespace FakeHttp
                 {
                     var response = _handler(request, cancellationToken);
                     if (response == null)
-                        throw new NullResponseException("The fake tried to returned a null response.");
+                        throw new NullResponseException("The fake tried to return a null response.");
                     return response;
                 });
         }

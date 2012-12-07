@@ -82,6 +82,9 @@ publish
 packages
 !packages/repositories.config
 
+# NuGet Publishing
+*.nupkg
+
 # Windows Azure Build Output
 csx
 *.build.csdef
