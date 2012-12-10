@@ -2,17 +2,17 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>FakeHttp</id>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <title>FakeHttp</title>
     <authors>Mark Melville</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Easily test your code that makes HTTP requests with this library of fakes.</description>
-    <summary>FakeHttp contains helpers that allow isolated testing of code that makes HTTP requests. Even though your code thinks it has a real object, all the responses are faked and so no actual HTTP request is made.</summary>
-    <releaseNotes>First version! Repo is currently private.</releaseNotes>
+    <summary>FakeHttp contains helpers that allow isolated testing of code that makes HTTP requests. Even though the code thinks it has a real object, all the responses are faked and so no actual HTTP request is made.</summary>
+    <releaseNotes>First version! Github project made available, check it for basic example. More docs will follow.</releaseNotes>
 	<frameworkAssemblies>
 	  <frameworkAssembly assemblyName="System.Net.Http" targetFramework="net40" />
 	</frameworkAssemblies>
-	<!--<projectUrl>https://github.com/Ancestry/FakeHttp</projectUrl>-->
+	<projectUrl>https://github.com/markmelville/FakeHttp</projectUrl>-->
 	<tags>fakes HttpClient mock HttpRequest</tags>
   </metadata>
   <files>
