@@ -62,5 +62,28 @@ namespace FakeHttp.Tests
             Assert.AreEqual(HttpStatusCode.NotFound, response404.StatusCode);
             Assert.AreEqual(HttpStatusCode.OK, response200.StatusCode);
         }
+
+        [TestMethod]
+        public async Task FakeHttpClient_AllowsRulesWithStaticReturnValue()
+        {
+            var fakeClient = new FakeHttpClient();
+            fakeClient.AddRule(OkResponse);
+
+            var response200 = await fakeClient.GetAsync("http://www.404.com");
+
+            Assert.AreEqual(HttpStatusCode.OK, response200.StatusCode);
+        }
+
+        [TestMethod]
+        public async Task FakeHttpClient_KeepsRequestHistory()
+        {
+            var fakeClient = new FakeHttpClient();
+            fakeClient.AddRule(OkResponse);
+
+            var response404 = await fakeClient.GetAsync("http://www.404.com");
+            var response200 = await fakeClient.GetAsync("http://www.200.com");
+
+            Assert.AreEqual(2, fakeClient.History.Count);
+        }
     }
 }

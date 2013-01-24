@@ -2,7 +2,7 @@
 
 namespace FakeHttp.Rules
 {
-    public interface IRuleSet<out T, in TOut>
+    internal interface IRuleSet<out T, in TOut>
     {
         void AddRule(Func<T, TOut> selector);
 
@@ -11,7 +11,7 @@ namespace FakeHttp.Rules
         void AddRule(Func<T, bool> predicate, TOut output);
     }
 
-    public interface IRuleSet<out T, out T2, in TOut>
+    internal interface IRuleSet<out T, out T2, in TOut>
     {
         void AddRule(Func<T, T2, TOut> selector);
 

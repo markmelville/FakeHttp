@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeHttp", "FakeHttp.csproj", "{790FA21E-D102-4ECC-8F5C-625031304B7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeHttp", "FakeHttp\FakeHttp.csproj", "{790FA21E-D102-4ECC-8F5C-625031304B7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeHttp.Tests", "..\FakeHttp.Tests\FakeHttp.Tests.csproj", "{3206874B-7EF6-4909-82CE-8411BE9CC20F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeHttp.Tests", "FakeHttp.Tests\FakeHttp.Tests.csproj", "{3206874B-7EF6-4909-82CE-8411BE9CC20F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

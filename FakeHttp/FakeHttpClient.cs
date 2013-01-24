@@ -12,13 +12,23 @@ namespace FakeHttp
     {
         private readonly List<IfThen<HttpRequestMessage, CancellationToken, HttpResponseMessage>> _rules;
         private readonly Queue<Func<HttpRequestMessage, CancellationToken, HttpResponseMessage>> _queue;
+        private readonly IList<HttpRequestMessage> _history;
 
         #region Constructors
-        public FakeHttpClient() : this(new List<IfThen<HttpRequestMessage, CancellationToken, HttpResponseMessage>>(), new Queue<Func<HttpRequestMessage, CancellationToken, HttpResponseMessage>>()) { }
+        // default constructor passes blank rules and queue to the 2nd constructor
+        public FakeHttpClient() : this(
+            new List<IfThen<HttpRequestMessage, CancellationToken, HttpResponseMessage>>(),
+            new Queue<Func<HttpRequestMessage, CancellationToken, HttpResponseMessage>>(),
+            new List<HttpRequestMessage>()) { }
 
-        private FakeHttpClient(List<IfThen<HttpRequestMessage, CancellationToken, HttpResponseMessage>> rules, Queue<Func<HttpRequestMessage, CancellationToken, HttpResponseMessage>> queue)
+        // this one takes the rules and queue, and creates a handler for them, and invokes that constructor with the handler
+        private FakeHttpClient(
+            List<IfThen<HttpRequestMessage, CancellationToken, HttpResponseMessage>> rules,
+            Queue<Func<HttpRequestMessage, CancellationToken, HttpResponseMessage>> queue,
+            IList<HttpRequestMessage> history)
             : this((request, cancellationToken) =>
             {
+                history.Add(request);
                 var response = queue.Count > 0 ? queue.Dequeue() : null;
                 if (response == null)
                 {
@@ -37,9 +47,17 @@ namespace FakeHttp
         {
             _rules = rules;
             _queue = queue;
+            _history = history;
         }
 
-        private FakeHttpClient(Func<HttpRequestMessage, CancellationToken, HttpResponseMessage> handler) : base(new InterceptingMessageHandler(handler)) { }
+        // this one takes the handler and sets up the base with it.
+        private FakeHttpClient(Func<HttpRequestMessage, CancellationToken, HttpResponseMessage> handler)
+            : base(new InterceptingMessageHandler(handler))
+        {
+
+        }
+
+        public IList<HttpRequestMessage> History { get { return _history; } }
 
         #endregion
 
@@ -57,6 +75,11 @@ namespace FakeHttp
         public void AddRule(Func<HttpRequestMessage, bool> predicate, HttpResponseMessage output)
         {
             AddRule(predicate, req => output);
+        }
+
+        public void AddRule(HttpResponseMessage output)
+        {
+            AddRule(req => output);
         }
 
         public void AddRule(Func<HttpRequestMessage, CancellationToken, bool> predicate, Func<HttpRequestMessage, CancellationToken, HttpResponseMessage> selector)

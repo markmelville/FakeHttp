@@ -3,7 +3,7 @@ FakeHttp - because there's a lot of real HTTP going on, and we need to test it.
 FakeHttp contains helpers that allow isolated testing of code that makes HTTP requests. Even though the code thinks it has a real object, all the responses are faked and so no actual HTTP request is made.
 
 ## NuGet
-This project is foun on NuGet.org at [https://nuget.org/packages/FakeHttp]
+This project is found on NuGet.org at [https://nuget.org/packages/FakeHttp]
 
 ## HttpClient
 The only currently supported object is System.Net.Http.HttpClient, which is new as of .NET 4.0. If this object implemented an interface, you could use your favorite mock library as a fake. Since it doesn't, we provide a FakeHttpClient which can be configured to return the desired responses.

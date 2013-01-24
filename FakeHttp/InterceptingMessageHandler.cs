@@ -6,7 +6,7 @@ using FakeHttp.Exceptions;
 
 namespace FakeHttp
 {
-    public class InterceptingMessageHandler : HttpMessageHandler
+    internal class InterceptingMessageHandler : HttpMessageHandler
     {
         private readonly Func<HttpRequestMessage, CancellationToken, HttpResponseMessage> _handler;
 
